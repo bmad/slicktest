@@ -1,0 +1,30 @@
+h1
+{
+  text-align:center;
+  margin-top: 30px;
+}
+
+#content
+{
+  padding-left:35px;
+}
+.data_table
+{
+  table-layout: fixed;
+  display: block;
+  margin-right: 40px;
+}
+
+  .row-fluid
+{
+  border: 1px solid;
+  padding: 3px;
+}
+
+.new_modal_btn.btn
+{
+  margin-left: 10px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+

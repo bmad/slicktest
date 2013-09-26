@@ -1,0 +1,36 @@
+<p id="notice"><%= notice %></p>
+
+<h1>
+  <%= @tc.name %>
+</h1>
+
+<div id="content">
+
+<%= link_to 'Edit', [:edit, @tc.project, @tc] %> |
+<%= link_to 'Back', project_path(@tc.project), :class => "back_link" %>
+
+<a id="new_step_modal_btn" data-backdrop="false" type="button" class="btn btn-primary new_modal_btn" href="#new_step_modal" data-toggle="modal" data-case_id="<%= @tc.id %>" data-project_id="<%= @tc.project.id %>">New Step</a>
+<br />
+<div id="steps_table" class="bs-docs-grid data_table">
+  <div class="row-fluid show-grid">
+    <div class="span2"></div>
+    <div class="span8">Description</div>
+  </div>
+  <% @steps.each do |step| %>
+    <div id="step_<%= step.id %>" data-id="<%= step.id %>" class="row-fluid show-grid step_row" data-project_id="<%= @tc.project.id %>" data-case_id="<%= @tc.id %>">
+      <div class="span2"><%= link_to 'Edit', [:edit, @tc.project, @tc, step] %> <a class="delete" href="#">Delete</a></div>
+      <div class="span8 description"><%= step.description %></div>
+    </div>
+  <% end %>
+</div>
+
+<div id="new_step_modal" class="modal hide">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden=true">&times;</button>
+  <h3>Step</h3>
+  </div>
+  <div class="modal-body">
+  </div>
+</div>
+
+</div>
