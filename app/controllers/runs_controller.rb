@@ -1,78 +1,78 @@
 class RunsController < ApplicationController
-  # GET /projects
+  # GET /runs
   def index
     @run = Run.new
-    @projects = Project.all
+    @runs = Run.all
 
     respond_to do |format|
       format.html # index.html.erb
     end
   end
 
-  # GET /projects/1
-  # GET /projects/1.json
+  # GET /runs/1
+  # GET /runs/1.json
   def show
-    @project = Project.find(params[:id])
-    @tcs = @project.test_cases.all
+    @run.find(params[:id])
+    @rcs = @run.run_cases.all
 
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render :json => @project }
+      format.json { render :json => @run }
     end
   end
 
-  # GET /projects/new
-  # GET /projects/new.json
+  # GET /run/new
+  # GET /runs/new.json
   def new
-    @project = Run.new
+    @run = Run.new
 
     respond_to do |format|
       format.html # new.html.erb
     end
   end
 
-  # GET /projects/1/edit
+  # GET /runs/1/edit
   def edit
-    @project = Project.find(params[:id])
+    @run = Run.find(params[:id])
   end
 
-  # POST /projects
-  # POST /prjects.json
+  # POST /runs
+  # POST /runs.json
   def create
-    @project = Project.new(params[:project])
+    @run = Run.new(params[:run])
 
     respond_to do |format|
-      if @project.save
-        format.json { render :json => @project, :status => :created, :location => @project }
+      if @run.save
+        format.json { render :json => @run, :status => :created, :location => @run }
         format.html
       else
         format.html { render :action => "new" }
-        format.json { render :json => @project.errors, :status => :unprocessable_entity }
+        format.json { render :json => @run.errors, :status => :unprocessable_entity }
       end
     end
   end
 
-  # PUT /projects/1
-  # PUT /projects/1.json
+  # PUT /runs/1
+  # PUT /runs/1.json
   def update
-    @project = Project.find(params[:id])
+    @run = Run.find(params[:id])
 
     respond_to do |format|
-      if @project.update_attributes(params[:project])
-        format.html { redirect_to @project, :notice => 'Project was successfully updated.' }
+      if @run.update_attributes(params[:run])
+        format.html { redirect_to @run, :notice => 'Run was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render :action => "edit" }
-        format.json { render :json => @project.errors, :status => :unprocessable_entity }
+        format.json { render :json => @run.errors, :status => :unprocessable_entity }
       end
     end
   end
 
-  # DELETE /projects/1
-  # DELETE /projects/1.json
+  # DELETE /runs/1
+  # DELETE /runs/1.json
   def destroy
-    @project = Project.find(params[:id])
-    @project.destroy
+    @run = Run.find(params[:id])
+    @run.destroy
 
     respond_to do |format|
       format.json { render :json => "success" }
