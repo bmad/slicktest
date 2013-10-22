@@ -9,6 +9,11 @@ SlickTest::Application.routes.draw do
     resources :test_cases
     resources :steps
 
+  resources :runs do
+    resources :run_cases do
+      resources :run_steps
+    end
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

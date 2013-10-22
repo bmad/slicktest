@@ -10,7 +10,7 @@ class RunStepsController < ApplicationController
     end
   end
 
-  # GET /run_step/new
+  # GET /run_steps/new
   # GET /run_steps/new.json
   def new
     @step = RunStep.new
@@ -22,31 +22,15 @@ class RunStepsController < ApplicationController
     end
   end
 
-  # GET /projects/1/edit
+  # GET /run_steps/1/edit
   def edit
-    @step = Step.find(params[:id])
+    @step = RunStep.find(params[:id])
   end
 
-  # POST /projects
-  # POST /prjects.json
-  def create
-    @step = Step.new(params[:step])
-    @step.test_case_id = params[:test_case_id].to_i
-
-    respond_to do |format|
-      if @step.save
-        format.json { render :json => @step, :status => :created, :location => @step }
-      else
-        format.html { render :action => "new" }
-        format.json { render :json => @step.errors, :status => :unprocessable_entity }
-      end
-    end
-  end
-
-  # PUT /projects/1
-  # PUT /projects/1.json
+  # PUT /run_steps/1
+  # PUT /run_steps/1.json
   def update
-    @step = Step.find(params[:id])
+    @step = RunStep.find(params[:id])
 
     respond_to do |format|
       if @step.update_attributes(params[:step])
@@ -59,10 +43,10 @@ class RunStepsController < ApplicationController
     end
   end
 
-  # DELETE /projects/1
-  # DELETE /projects/1.json
+  # DELETE /run_steps/1
+  # DELETE /run_steps/1.json
   def destroy
-    @step = Step.find(params[:id])
+    @step = RunStep.find(params[:id])
     @step.destroy
 
     respond_to do |format|

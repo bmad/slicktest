@@ -1,4 +1,4 @@
-class TestCase < ActiveRecord::Base
+class RunCase < ActiveRecord::Base
   belongs_to :run
   has_many :run_steps
   attr_accessible :name, :description

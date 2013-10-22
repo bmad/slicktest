@@ -19,6 +19,26 @@ ActiveRecord::Schema.define(:version => 20130517032905) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "run_cases", :force => true do |t|
+    t.integer "run_id"
+    t.string  "name"
+    t.text    "description"
+  end
+
+  create_table "run_steps", :force => true do |t|
+    t.integer "run_case_id"
+    t.integer "place"
+    t.string  "status"
+    t.text    "description"
+  end
+
+  create_table "runs", :force => true do |t|
+    t.integer "project_id"
+    t.string  "name"
+    t.string  "status"
+    t.boolean "archived"
+  end
+
   create_table "steps", :force => true do |t|
     t.integer  "test_case_id"
     t.integer  "place"

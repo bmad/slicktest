@@ -25,6 +25,7 @@ class RunsController < ApplicationController
   # GET /runs/new.json
   def new
     @run = Run.new
+    @projects = Projects.all
 
     respond_to do |format|
       format.html # new.html.erb
@@ -40,6 +41,15 @@ class RunsController < ApplicationController
   # POST /runs.json
   def create
     @run = Run.new(params[:run])
+    @project = Project.find(params[:project_id])
+    @project.test_cases.each {|tc|
+      run_case = RunCase.new({:run => @run, :name => tc.name, :description => tc.description })
+      run_case.save!
+      tc.steps.each {|rs|
+        run_steps = RunStep.new({:run_case => run_case, :place => rs.place, :status => rs.status, :description => rs.description })
+        run_steps.save!
+      }
+    }
 
     respond_to do |format|
       if @run.save
