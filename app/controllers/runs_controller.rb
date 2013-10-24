@@ -12,7 +12,7 @@ class RunsController < ApplicationController
   # GET /runs/1
   # GET /runs/1.json
   def show
-    @run.find(params[:id])
+    @run = Run.find(params[:id])
     @rcs = @run.run_cases.all
 
     respond_to do |format|
@@ -25,7 +25,7 @@ class RunsController < ApplicationController
   # GET /runs/new.json
   def new
     @run = Run.new
-    @projects = Projects.all
+    @projects = Project.all
 
     respond_to do |format|
       format.html # new.html.erb
@@ -35,21 +35,23 @@ class RunsController < ApplicationController
   # GET /runs/1/edit
   def edit
     @run = Run.find(params[:id])
+    @projects = Project.all
   end
 
   # POST /runs
   # POST /runs.json
   def create
     @run = Run.new(params[:run])
-    @project = Project.find(params[:project_id])
-    @project.test_cases.each {|tc|
+    @project = Project.find(params[:run][:project_id])
+    @run.project = @project
+    @project.test_cases.each do |tc|
       run_case = RunCase.new({:run => @run, :name => tc.name, :description => tc.description })
       run_case.save!
-      tc.steps.each {|rs|
-        run_steps = RunStep.new({:run_case => run_case, :place => rs.place, :status => rs.status, :description => rs.description })
+      tc.steps.each do |rs|
+        run_steps = RunStep.new({:run_case => run_case, :place => rs.place, :status => "new", :description => rs.description })
         run_steps.save!
-      }
-    }
+      end
+    end
 
     respond_to do |format|
       if @run.save

@@ -1,4 +1,4 @@
-<%= form_for(@tc, :url => project_test_cases_path(@project, @tc)) do |f| %>
+<%= form_for(@tc, :url => project_test_case_path(@project, @tc)) do |f| %>
   <% if @tc.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@tc.errors.count, "error") %> prohibited this test case from being saved:</h2>

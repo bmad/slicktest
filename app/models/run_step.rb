@@ -1,5 +1,5 @@
 class RunStep < ActiveRecord::Base
   belongs_to :run_case
-  attr_accessible :place, :status, :description
+  attr_accessible :run_case, :place, :status, :description
 
 end

@@ -27,9 +27,7 @@ class ProjectsController < ApplicationController
   def new
     @project = Project.new
 
-    respond_to do |format|
-      format.html # new.html.erb
-    end
+    render :layout => "empty"
   end
 
   # GET /projects/1/edit
@@ -45,7 +43,7 @@ class ProjectsController < ApplicationController
     respond_to do |format|
       if @project.save
         format.json { render :json => @project, :status => :created, :location => @project }
-        format.html
+        format.html { redirect_to(projects_path) }
       else
         format.html { render :action => "new" }
         format.json { render :json => @project.errors, :status => :unprocessable_entity }

@@ -15,12 +15,10 @@
     <%= f.label :name %><br />
     <%= f.text_field :name %>
   </div>
-  <% if @run.id.nil? %>
-    <div class="field">
-      <%= f.label :project %><br />
-      <%= collection_select(:run, :project_id, @projects, :id, :name, prompt: true) %>
-    </div>
-<% end %>
+  <div class="field">
+    <%= f.label :project %><br />
+    <%= collection_select(:run, :project_id, @projects, :id, :name, prompt: true) %>
+  </div>
   <div class="actions">
     <%= f.submit %>
   </div>

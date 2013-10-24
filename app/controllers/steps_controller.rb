@@ -22,9 +22,11 @@ class StepsController < ApplicationController
     end
   end
 
-  # GET /projects/1/edit
+  # GET /projects/<project_id>/test_cases/<test_case_id>/steps/<step_id>/edit
   def edit
     @step = Step.find(params[:id])
+    @tc = TestCase.find(params[:test_case_id])
+    @project = Project.find(params[:project_id])
   end
 
   # POST /projects

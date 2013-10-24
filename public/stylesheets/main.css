@@ -1,3 +1,8 @@
+body
+{
+  padding-top: 30px;
+}
+
 h1
 {
   text-align:center;
@@ -10,15 +15,10 @@ h1
 }
 .data_table
 {
-  table-layout: fixed;
-  display: block;
-  margin-right: 40px;
 }
 
   .row-fluid
 {
-  border: 1px solid;
-  padding: 3px;
 }
 
 .new_modal_btn.btn

@@ -22,18 +22,18 @@ $("#new_run_modal").on('show', function () {
 
 });
 
-$("#new_project input[type='submit']").click(function(e) {
+$("#new_run input[type='submit']").click(function(e) {
   e.preventDefault();
 
   $.ajax({
     type: "POST",
-    url: "projects",
-    data: $("#new_project").serialize(),
+    url: "runs",
+    data: $("#new_run").serialize(),
     success: function(msg) {
       location.reload();
     },
     error: function(data, status, error) {
-      $("#new_project_modal .modal-body").html(data);
+      $("#new_run_modal .modal-body").html(data);
     }
   });
 

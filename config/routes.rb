@@ -6,8 +6,8 @@ SlickTest::Application.routes.draw do
       resources :steps
     end
   end
-    resources :test_cases
-    resources :steps
+    #resources :test_cases
+    #resources :steps
 
   resources :runs do
     resources :run_cases do
