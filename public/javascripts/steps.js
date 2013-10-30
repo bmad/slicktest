@@ -5,6 +5,7 @@ function get_step_id(elem) {
 
 $("#steps_table").delegate(".delete", "click", function(event){
   event.preventDefault();
+  if (confirm("Are you sure?") != true) { return false; }
   var id = get_step_id($(this));
   var project_id = $(this).closest(".step_row").data("project_id");
   var case_id = $(this).closest(".step_row").data("case_id");
@@ -16,7 +17,7 @@ $("#steps_table").delegate(".delete", "click", function(event){
   $(this).closest('.step_row').remove();
 });
 
-$("#new_step_modal").on('show', function () {
+$("#new_step_modal").on('show.bs.modal', function () {
 
   var project_id = $("#new_step_modal_btn").data('project_id');
   var case_id = $("#new_step_modal_btn").data('case_id');

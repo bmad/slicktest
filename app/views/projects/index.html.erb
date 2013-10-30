@@ -1,27 +1,25 @@
 <div id="content">
 
-  <%= link_to 'Back', "/" %>
+  <h1>Projects</h1>
 
 <a id="new_project_modal_btn" data-backdrop="false" type="button" class="btn btn-primary new_modal_btn" href="#new_project_modal" data-toggle="modal">New Project</a>
 <br />
-<div class="table-responsive">
 <table id="projects_table" class="table table-bordered table-responsive data_table">
   <thead>
     <tr>
-    <th class="" style="width:10%"></th>
-    <th class="" style="width:90%">Name</th>
+    <th style="width:10%"></th>
+    <th style="width:90%">Name</th>
   </tr>
 </thead>
 <tbody>
 <% @projects.each do |project| %>
-  <tr id="project_<%= project.id %>" data-id="<%= project.id %>" class="row-fluid show-grid project_row">
-    <td class=""><a class="delete" href="#">Delete</a></td>
+  <tr id="project_<%= project.id %>" data-id="<%= project.id %>" class="project_row">
+    <td><a class="delete" href="#">Delete</a></td>
     <td class="name"><%= link_to project.name, project_path(project) %></td>
   </tr>
 <% end %>
 </tbody>
 </table>
-</div>
 
 <div id="new_project_modal" class="modal fade">
   <div class="modal-dialog">

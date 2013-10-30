@@ -5,6 +5,8 @@ function get_project_id(elem) {
 
 $("#projects_table").delegate(".delete", "click", function(event){
   event.preventDefault();
+  if (confirm("Are you sure?") != true) { return false; }
+
   var id = get_project_id($(this));
   var delete_url = "projects/" + id;
   $.ajax({
@@ -18,6 +20,7 @@ $("#new_project_modal").on('show.bs.modal', function () {
 
   $.get("projects/new", function(data) {
     $("#new_project_modal .modal-body").html(data);
+    $("#project_name").focus();
   });
 
 });

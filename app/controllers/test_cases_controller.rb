@@ -27,9 +27,7 @@ class TestCasesController < ApplicationController
     @tc = TestCase.new
     @project = Project.find(params[:project_id])
 
-    respond_to do |format|
-      format.html # new.html.erb
-    end
+    render :layout => "empty"
   end
 
   # GET /test_cases/1/edit
@@ -47,6 +45,7 @@ class TestCasesController < ApplicationController
     respond_to do |format|
       if @tc.save!
         format.json { render :json => @tc, :status => :created, location => @tc }
+        format.html { redirect_to(project_path(@tc.project)) }
       else
         format.html { render :action => "new" }
         format.json { render :json => @tc.errors, :status => :unprocessable_entity }
@@ -61,7 +60,7 @@ class TestCasesController < ApplicationController
 
     respond_to do |format|
       if @tc.update_attributes(params[:test_case])
-        format.html { redirect_to @tce, :notice => 'Case was successfully updated.' }
+        format.html { redirect_to(project_test_case_path(@tc.project, @tc)) }
         format.json { head :no_content }
       else
         format.html { render :action => "edit" }

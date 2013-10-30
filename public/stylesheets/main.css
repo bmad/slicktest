@@ -23,8 +23,8 @@ h1
 
 .new_modal_btn.btn
 {
-  margin-left: 10px;
-  margin-top: 15px;
+  float: right;
+  margin-top: 5px;
   margin-bottom: 15px;
 }
 

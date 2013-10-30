@@ -17,9 +17,7 @@ class StepsController < ApplicationController
     @project = Project.find(params[:project_id])
     @tc = TestCase.find(params[:test_case_id])
 
-    respond_to do |format|
-      format.html # new.html.erb
-    end
+    render :layout => "empty"
   end
 
   # GET /projects/<project_id>/test_cases/<test_case_id>/steps/<step_id>/edit
@@ -38,6 +36,7 @@ class StepsController < ApplicationController
     respond_to do |format|
       if @step.save
         format.json { render :json => @step, :status => :created, :location => @step }
+        format.html { redirect_to(project_test_case_path(@step.test_case.project, @step.test_case)) }
       else
         format.html { render :action => "new" }
         format.json { render :json => @step.errors, :status => :unprocessable_entity }
@@ -52,7 +51,7 @@ class StepsController < ApplicationController
 
     respond_to do |format|
       if @step.update_attributes(params[:step])
-        format.html { redirect_to @step.test_case, :notice => 'Step was successfully updated.' }
+        format.html { redirect_to(project_test_case_path(@step.test_case.project, @step.test_case)) }
         format.json { head :no_content }
       else
         format.html { render :action => "edit" }
