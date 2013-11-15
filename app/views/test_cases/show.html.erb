@@ -6,8 +6,12 @@
   <%= @tc.name %>
 </h1>
 
-<%= link_to 'Edit', [:edit, @tc.project, @tc] %> |
-<%= link_to 'Back', project_path(@tc.project), :class => "back_link" %>
+<%= link_to project_path(@tc.project), :class => "back_link" do %>
+  <span class="glyphicon glyphicon-backward"></span>
+<% end %>
+<%= link_to [:edit, @tc.project, @tc] do %>
+  <span class="glyphicon glyphicon-edit"></span>
+<% end %>
 
 <a id="new_step_modal_btn" data-backdrop="false" type="button" class="btn btn-primary new_modal_btn" href="#new_step_modal" data-toggle="modal" data-case_id="<%= @tc.id %>" data-project_id="<%= @tc.project.id %>">New Step</a>
 <br />
@@ -21,7 +25,12 @@
 <tbody>
   <% @steps.each do |step| %>
     <tr id="step_<%= step.id %>" data-id="<%= step.id %>" class="step_row" data-project_id="<%= @tc.project.id %>" data-case_id="<%= @tc.id %>">
-      <td><%= link_to 'Edit', [:edit, @tc.project, @tc, step] %> <a class="delete" href="#">Delete</a></td>
+      <td class="edit-col">
+        <%= link_to [:edit, @tc.project, @tc, step] do %>
+          <span class="glyphicon glyphicon-edit"></span>
+        <% end %>
+        <a class="delete" href="#"><span class="glyphicon glyphicon-trash"></span></a>
+      </td>
       <td class="description"><pre><%= step.description %></pre></td>
     </tr>
   <% end %>

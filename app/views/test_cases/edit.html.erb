@@ -1,8 +1,10 @@
-<h1>Editing Project</h1>
+<h1>Editing Test Case</h1>
 
 <div id="content">
 
-  <%= link_to 'Back', project_test_case_path(@project, @tc) %>
+  <%= link_to project_test_case_path(@project, @tc) do %>
+    <span class="glyphicon glyphicon-backward"></span>
+  <% end %>
 
   <%= render 'form' %>
 

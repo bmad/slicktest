@@ -15,8 +15,9 @@ ActiveRecord::Schema.define(:version => 20130517032905) do
 
   create_table "projects", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.string   "status",     :default => "new"
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
   end
 
   create_table "run_cases", :force => true do |t|
@@ -28,32 +29,33 @@ ActiveRecord::Schema.define(:version => 20130517032905) do
   create_table "run_steps", :force => true do |t|
     t.integer "run_case_id"
     t.integer "place"
-    t.string  "status"
+    t.string  "status",      :default => "new"
+    t.text    "note"
     t.text    "description"
   end
 
   create_table "runs", :force => true do |t|
     t.integer "project_id"
     t.string  "name"
-    t.string  "status"
-    t.boolean "archived"
+    t.string  "status",     :default => "new"
   end
 
   create_table "steps", :force => true do |t|
     t.integer  "test_case_id"
     t.integer  "place"
-    t.string   "status"
+    t.string   "status",       :default => "new"
     t.text     "description"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
   end
 
   create_table "test_cases", :force => true do |t|
     t.integer  "project_id"
     t.string   "name"
+    t.string   "status",      :default => "new"
     t.text     "description"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
   end
 
 end

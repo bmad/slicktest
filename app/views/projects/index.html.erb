@@ -14,7 +14,7 @@
 <tbody>
 <% @projects.each do |project| %>
   <tr id="project_<%= project.id %>" data-id="<%= project.id %>" class="project_row">
-    <td><a class="delete" href="#">Delete</a></td>
+    <td class="edit-col"><a class="delete" href="#"><span class="glyphicon glyphicon-trash"></span></a></td>
     <td class="name"><%= link_to project.name, project_path(project) %></td>
   </tr>
 <% end %>

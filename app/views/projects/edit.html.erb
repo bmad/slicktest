@@ -2,7 +2,9 @@
 
 <div id="content">
 
-<%= link_to 'Back', project_path(@project) %>
+<%= link_to project_path(@project) do %>
+  <span class="glyphicon glyphicon-backward"></span>
+<% end %>
 
 <%= render 'form' %>
 

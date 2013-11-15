@@ -13,13 +13,6 @@ h1
 {
   padding-left:35px;
 }
-.data_table
-{
-}
-
-  .row-fluid
-{
-}
 
 .new_modal_btn.btn
 {
@@ -28,3 +21,68 @@ h1
   margin-bottom: 15px;
 }
 
+#percent_completed
+{
+  float: right;
+}
+
+.run_step_row .radio
+{
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+.edit-col
+{
+  text-align:center;
+}
+
+.glyphicon-trash, .glyphicon-edit, .glyphicon-backward
+{
+  font-size:150%;
+}
+
+.glyphicon-backward
+{
+  padding-right:10px;
+}
+
+.note .glyphicon-comment
+{
+  font-size: 180%;
+}
+
+.has_note
+{
+  color:red
+}
+
+.status_new.checked
+{
+  background-color: #00BFFF;
+}
+
+.status_pass.checked
+{
+  background-color: #90EE90;
+}
+
+.status_failed.checked
+{
+  background-color: #CD5C5C;
+}
+
+.status_retest.checked
+{
+  background-color: #FFA500;
+}
+
+.status_skip.checked
+{
+  background-color: #9370DB;
+}
+
+.clear_float
+{
+  float:clear
+}

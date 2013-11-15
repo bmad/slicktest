@@ -11,17 +11,17 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="form-group">
     <%= f.label :name %><br />
-    <%= f.text_field :name %>
+    <%= f.text_field :name, class:"form-control" %>
   </div>
   <% if @run.id.nil? %>
-    <div class="field">
+    <div class="form-group">
       <%= f.label :project %><br />
-      <%= collection_select(:run, :project_id, @projects, :id, :name, prompt: true) %>
+      <%= collection_select(:run, :project_id, @projects, :id, :name, {:prompt => true},  {:class => "form-control"}) %>
     </div>
 <% end %>
-  <div class="actions">
-    <%= f.submit %>
+  <div class="form-actions">
+    <%= f.submit :save, class:"btn btn-default" %>
   </div>
 <% end %>

@@ -1,19 +1,11 @@
 class TestCasesController < ApplicationController
-  # GET /test_cases
-  def index
-    @tc = TestCase.all
 
-    respond_to do |format|
-      format.html # index.html.erb
-    end
-  end
-
-  # GET /test_cases/1
-  # GET /test_cases/1.json
+  # GET /project/:project_id/test_cases/:id
+  # GET /project/:project_id/test_cases/:id.json
   def show
     @tc = TestCase.find(params[:id])
     @project = @tc.project
-    @steps = @tc.steps
+    @steps = @tc.steps.where("status != 'deleted'")
     @steps = [] if @steps.nil?
 
     respond_to do |format|
@@ -22,7 +14,7 @@ class TestCasesController < ApplicationController
     end
   end
 
-  # GET /project/<project_id>/test_cases/new
+  # GET /project/:project_id/test_cases/new
   def new
     @tc = TestCase.new
     @project = Project.find(params[:project_id])
@@ -30,14 +22,14 @@ class TestCasesController < ApplicationController
     render :layout => "empty"
   end
 
-  # GET /test_cases/1/edit
+  # GET /project/:project_id/test_cases/:id/edit
   def edit
     @tc = TestCase.find(params[:id])
     @project = @tc.project
   end
 
-  # POST /test_case
-  # POST /test_case.json
+  # POST /project/:project_id/test_case
+  # POST /project/:project_id/test_case.json
   def create
     @tc = TestCase.new(params[:test_case])
     @tc.project = Project.find(params[:project_id].to_i)
@@ -53,8 +45,8 @@ class TestCasesController < ApplicationController
     end
   end
 
-  # PUT /test_cases/1
-  # PUT /testcases/1.json
+  # PUT /project/:project_id/test_cases/:id
+  # PUT /project/:project_id/test_cases/:id.json
   def update
     @tc = TestCase.find(params[:id])
 
@@ -69,11 +61,12 @@ class TestCasesController < ApplicationController
     end
   end
 
-  # DELETE /test_cases/1
-  # DELETE /test_cases/1.json
+  # DELETE /project/:project_id/test_cases/:id
+  # DELETE /project/:project_id/test_cases/:id.json
   def destroy
     @tc = TestCase.find(params[:id])
-    @tc.destroy
+    @tc.status = "deleted"
+    @tc.save!
 
     respond_to do |format|
       format.json { render :json => "success" }

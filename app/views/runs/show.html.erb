@@ -1,28 +1,37 @@
-<p id="notice"><%= notice %></p>
-
+<div id="content">
+  
+  <p id="notice"><%= notice %></p>
 <h1>
   <%= @run.name %>
 </h1>
 
-<div id="content">
+<h3 id="percent_completed"><%= @run.percent_completed %>%</h3>
 
-<%= link_to 'Edit', edit_run_path(@run) %> |
-<%= link_to 'Back', runs_path %>
-
-<br />
-<div id="run_cases_table" class="data_table bs-docs-grid">
-  <div class="row-fluid show-grid">
-    <div class="span2"></div>
-    <div class="span4">Name</div>
-    <div class="span4">Description</div>
-  </div>
-<% @rcs.each do |rc| %>
-  <div id="run_case_<%= rc.id %>" data-id="<%= rc.id %>" class="row-fluid show-grid run_case_row" data-run_id="<%= @run.id %>">
-    <div class="span2"><a class="delete" href="#">Delete</a></div>
-    <div class="span4 name"><%= link_to rc.name, run_run_case_path(@run, rc) %></div>
-    <div class="span4 description"><%= rc.description %></div>
-  </div>
+<%= link_to edit_run_path(@run) do %>
+  <span class="glyphicon glyphicon-edit"></span>
 <% end %>
-</div>
+
+<table id="run_cases_table" class="table table-bordered table-responsive data_table">
+  <thead>
+    <tr>
+    <th style="width:10%">Percents</th>
+    <th style="width:30%">Test Case Name</th>
+    <th style="width:60%">Description</th>
+  </tr>
+</thead>
+<tbody>
+<% @rcs.each do |rc| %>
+  <tr id="run_case_<%= rc.id %>" data-id="<%= rc.id %>" class="run_case_row" data-run_id="<%= @run.id %>">
+    <td>
+      <%= rc.percent_completed %>% Complete<div class="clear_float" />
+        <%= rc.percent_passed %>% Passed<div class="clear_float" />
+      <%= rc.percent_failed %>% Failed
+    </td>
+    <td class="name"><%= link_to rc.name, run_run_case_path(@run, rc) %></td>
+    <td class="description"><%= rc.description %></td>
+  </tr>
+<% end %>
+</tbody>
+</table>
 
 </div>

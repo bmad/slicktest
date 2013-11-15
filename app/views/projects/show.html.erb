@@ -6,7 +6,9 @@
   <%= @project.name %>
 </h1>
 
-<%= link_to 'Edit', edit_project_path(@project) %>
+<%= link_to edit_project_path(@project) do %>
+  <span class="glyphicon glyphicon-edit"></span>
+<% end %>
 
 <a id="new_case_modal_btn" data-backdrop="false" type="button" class="new_modal_btn btn btn-primary" href="#new_case_modal" data-toggle="modal" data-project_id="<%= @project.id %>">New Case</a>
 <br />
@@ -14,14 +16,14 @@
   <thead>
     <tr>
       <th style="width:10%"></th>
-      <th style="width:20%">Name</th>
-      <th style="width:70%">Description</th>
+      <th style="width:60%">Name</th>
+      <th style="width:30%">Description</th>
     </tr>
   </thead>
   <tbody>
 <% @tcs.each do |tc| %>
   <tr id="case_<%= tc.id %>" data-id="<%= tc.id %>" class="case_row" data-project_id="<%= @project.id %>">
-    <td><a class="delete" href="#">Delete</a></td>
+    <td class="edit-col"><a class="delete" href="#"><span class="glyphicon glyphicon-trash"></span></a></td>
     <td class="name"><%= link_to tc.name, project_test_case_path(@project, tc) %></td>
     <td class="description"><%= tc.description %></td>
   </tr>

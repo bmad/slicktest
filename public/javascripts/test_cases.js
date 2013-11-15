@@ -29,20 +29,3 @@ $("#new_case_modal").on('show.bs.modal', function () {
 
 });
 
-$("#new_test_case input[type='submit']").click(function(e) {
-  e.preventDefault();
-  var project_id = $("#new_case_modal_btn").data('project_id');
-
-  $.ajax({
-    type: "POST",
-    url: project_id + "/test_cases",
-    data: $("#new_test_case").serialize(),
-    success: function(msg) {
-      location.reload();
-    },
-    error: function(data, status, error) {
-      $("#new_case_modal .modal-body").html(data);
-    }
-  });
-
-});

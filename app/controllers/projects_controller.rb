@@ -2,7 +2,7 @@ class ProjectsController < ApplicationController
   # GET /projects
   def index
     @project = Project.new
-    @projects = Project.all
+    @projects = Project.where("status != 'deleted'")
 
     respond_to do |format|
       format.html # index.html.erb
@@ -10,11 +10,11 @@ class ProjectsController < ApplicationController
     end
   end
 
-  # GET /projects/1
-  # GET /projects/1.json
+  # GET /projects/:id
+  # GET /projects/:id.json
   def show
     @project = Project.find(params[:id])
-    @tcs = @project.test_cases.all
+    @tcs = @project.test_cases.where("status != 'deleted'")
 
     respond_to do |format|
       format.html # show.html.erb
@@ -30,7 +30,7 @@ class ProjectsController < ApplicationController
     render :layout => "empty"
   end
 
-  # GET /projects/1/edit
+  # GET /projects/:id/edit
   def edit
     @project = Project.find(params[:id])
   end
@@ -51,8 +51,8 @@ class ProjectsController < ApplicationController
     end
   end
 
-  # PUT /projects/1
-  # PUT /projects/1.json
+  # PUT /projects/:id
+  # PUT /projects/:id.json
   def update
     @project = Project.find(params[:id])
 
@@ -67,11 +67,12 @@ class ProjectsController < ApplicationController
     end
   end
 
-  # DELETE /projects/1
-  # DELETE /projects/1.json
+  # DELETE /projects/:id
+  # DELETE /projects/:id.json
   def destroy
     @project = Project.find(params[:id])
-    @project.destroy
+    @project.status = 'deleted'
+    @project.save!
 
     respond_to do |format|
       format.json { render :json => "success" }

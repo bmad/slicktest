@@ -25,19 +25,3 @@ $("#new_project_modal").on('show.bs.modal', function () {
 
 });
 
-$("#new_project input[type='submit']").click(function(e) {
-  e.preventDefault();
-
-  $.ajax({
-    type: "POST",
-    url: "projects",
-    data: $("#new_project").serialize(),
-    success: function(msg) {
-      location.reload();
-    },
-    error: function(data, status, error) {
-      $("#new_project_modal .modal-body").html(data);
-    }
-  });
-
-});

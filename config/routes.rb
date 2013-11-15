@@ -6,12 +6,14 @@ SlickTest::Application.routes.draw do
       resources :steps
     end
   end
-    #resources :test_cases
-    #resources :steps
 
   resources :runs do
     resources :run_cases do
-      resources :run_steps
+      resources :run_steps do
+        member do
+          put 'update_note'
+        end
+      end
     end
   end
 

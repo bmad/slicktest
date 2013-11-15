@@ -1,8 +1,10 @@
-<h1>Editing Project</h1>
+<h1>Editing Test Run</h1>
 
 <div id="content">
 
-<%= link_to 'Back', run_path(@run) %>
+<%= link_to run_path(@run) do %>
+    <span class="glyphicon glyphicon-backward"></span>
+<% end %>
 
 <%= render 'form' %>
 

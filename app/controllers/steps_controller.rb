@@ -1,6 +1,6 @@
 class StepsController < ApplicationController
 
-  # GET /projects/<project_id>/test_cases/<test_case_id>/steps/<step_id>
+  # GET /projects/:project_id/test_cases/:test_case_id/steps/:id
   def show
     @step = Step.find(params[:id])
 
@@ -10,8 +10,8 @@ class StepsController < ApplicationController
     end
   end
 
-  # GET /projects/new
-  # GET /projects/new.json
+  # GET /projects/:project_id/test_cases/:test_case_id/steps/new
+  # GET /projects/:project_id/test_cases/:test_case_id/steps/new.json
   def new
     @step = Step.new
     @project = Project.find(params[:project_id])
@@ -20,15 +20,16 @@ class StepsController < ApplicationController
     render :layout => "empty"
   end
 
-  # GET /projects/<project_id>/test_cases/<test_case_id>/steps/<step_id>/edit
+  # GET /projects/:project_id/test_cases/:test_case_id/steps/edit
+  # GET /projects/:project_id/test_cases/:test_case_id/steps/edit
   def edit
     @step = Step.find(params[:id])
     @tc = TestCase.find(params[:test_case_id])
     @project = Project.find(params[:project_id])
   end
 
-  # POST /projects
-  # POST /prjects.json
+  # POST /projects/:project_id/test_cases/:test_case_id/steps
+  # POST /projects/:project_id/test_cases/:test_case_id/steps.json
   def create
     @step = Step.new(params[:step])
     @step.test_case_id = params[:test_case_id].to_i
@@ -44,8 +45,8 @@ class StepsController < ApplicationController
     end
   end
 
-  # PUT /projects/1
-  # PUT /projects/1.json
+  # PUT /projects/:project_id/test_cases/:test_case_id/steps/:id
+  # PUT /projects/:project_id/test_cases/:test_case_id/steps/:id.json
   def update
     @step = Step.find(params[:id])
 
@@ -60,11 +61,12 @@ class StepsController < ApplicationController
     end
   end
 
-  # DELETE /projects/1
-  # DELETE /projects/1.json
+  # DELETE /projects/:project_id/test_cases/:test_case_id/steps/:id
+  # DELTE /projects/:project_id/test_cases/:test_case_id/steps/:id.json
   def destroy
     @step = Step.find(params[:id])
-    @step.destroy
+    @step.status = "deleted"
+    @step.save!
 
     respond_to do |format|
       format.json { render :json => "success" }

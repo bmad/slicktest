@@ -2,18 +2,21 @@ class RunsController < ApplicationController
   # GET /runs
   def index
     @run = Run.new
-    @runs = Run.all
+    @runs = Run.where("status != 'deleted'")
+    @runs.each { |r| r.calculate_percents }
 
     respond_to do |format|
       format.html # index.html.erb
     end
   end
 
-  # GET /runs/1
-  # GET /runs/1.json
+  # GET /runs/:id
+  # GET /runs/:id.json
   def show
     @run = Run.find(params[:id])
+    @run.calculate_percents
     @rcs = @run.run_cases.all
+    @rcs.each { |r| r.calculate_percents }
 
     respond_to do |format|
       format.html # show.html.erb
@@ -25,17 +28,15 @@ class RunsController < ApplicationController
   # GET /runs/new.json
   def new
     @run = Run.new
-    @projects = Project.all
+    @projects = Project.where("status != 'deleted'")
 
-    respond_to do |format|
-      format.html # new.html.erb
-    end
+    render :layout => "empty"
   end
 
-  # GET /runs/1/edit
+  # GET /runs/:id/edit
   def edit
     @run = Run.find(params[:id])
-    @projects = Project.all
+    @projects = Project.where("status != 'deleted'")
   end
 
   # POST /runs
@@ -43,20 +44,12 @@ class RunsController < ApplicationController
   def create
     @run = Run.new(params[:run])
     @project = Project.find(params[:run][:project_id])
-    @run.project = @project
-    @project.test_cases.each do |tc|
-      run_case = RunCase.new({:run => @run, :name => tc.name, :description => tc.description })
-      run_case.save!
-      tc.steps.each do |rs|
-        run_steps = RunStep.new({:run_case => run_case, :place => rs.place, :status => "new", :description => rs.description })
-        run_steps.save!
-      end
-    end
+    @run.import_project(@project)
 
     respond_to do |format|
       if @run.save
         format.json { render :json => @run, :status => :created, :location => @run }
-        format.html
+        format.html { redirect_to(runs_path) }
       else
         format.html { render :action => "new" }
         format.json { render :json => @run.errors, :status => :unprocessable_entity }
@@ -64,8 +57,8 @@ class RunsController < ApplicationController
     end
   end
 
-  # PUT /runs/1
-  # PUT /runs/1.json
+  # PUT /runs/:id
+  # PUT /runs/:id.json
   def update
     @run = Run.find(params[:id])
 
@@ -80,11 +73,12 @@ class RunsController < ApplicationController
     end
   end
 
-  # DELETE /runs/1
-  # DELETE /runs/1.json
+  # DELETE /runs/:id
+  # DELETE /runs/:id.json
   def destroy
     @run = Run.find(params[:id])
-    @run.destroy
+    @run.status = "deleted"
+    @run.save!
 
     respond_to do |format|
       format.json { render :json => "success" }

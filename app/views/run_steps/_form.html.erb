@@ -1,0 +1,51 @@
+<%= form_for [@run, @rc, @step], url: {action: "update_note"} do |f| %>
+  <% if @step.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@step.errors.count, "error") %> prohibited this test case from being saved:</h2>
+
+      <ul>
+      <% @step.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :note %><br />
+    <%= f.text_area :note, class:"form-control" %>
+  </div>
+  <div class="form-actions">
+    <%= f.submit :save, class:"btn btn-default" %>
+  </div>
+  <script>
+    $(".edit_run_step input[type='submit']").click(function(e) {
+      e.preventDefault();
+
+      var step_id = <%= @step.id %>;
+      var url = $(".edit_run_step").attr("action");
+      var note = $(".edit_run_step textarea").val();
+      var note_icon = $("#run_step_" + step_id + " .glyphicon-comment")
+
+      $.ajax({
+        type: "PUT",
+        url: url,
+        data: $(".edit_run_step").serialize(),
+        success: function(msg) {
+          },
+        error: function(data, status, error) {
+        $("#run_step_note_modal .modal-body").html(data);
+        }
+      });
+      $("#run_step_note_modal").modal('hide');
+
+      if(note == "")
+      {
+        note_icon.removeClass("has_note");
+        } else {
+        note_icon.addClass("has_note");
+      }
+
+  });
+  </script>
+<% end %>

@@ -5,6 +5,7 @@ function get_run_id(elem) {
 
 $("#runs_table").delegate(".delete", "click", function(event){
   event.preventDefault();
+  if (confirm("Are you sure?") != true) { return false; }
   var id = get_run_id($(this));
   var delete_url = "runs/" + id;
   $.ajax({
@@ -14,27 +15,11 @@ $("#runs_table").delegate(".delete", "click", function(event){
   $(this).closest('.run_row').remove();
 });
 
-$("#new_run_modal").on('show', function () {
+$("#new_run_modal").on('show.bs.modal', function () {
 
   $.get("runs/new", function(data) {
     $("#new_run_modal .modal-body").html(data);
-  });
-
-});
-
-$("#new_run input[type='submit']").click(function(e) {
-  e.preventDefault();
-
-  $.ajax({
-    type: "POST",
-    url: "runs",
-    data: $("#new_run").serialize(),
-    success: function(msg) {
-      location.reload();
-    },
-    error: function(data, status, error) {
-      $("#new_run_modal .modal-body").html(data);
-    }
+    $("#run_name").focus();
   });
 
 });

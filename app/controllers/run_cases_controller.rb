@@ -1,19 +1,12 @@
 class RunCasesController < ApplicationController
-  # GET /run_cases
-  def index
-    @rc = RunCase.all
 
-    respond_to do |format|
-      format.html # index.html.erb
-    end
-  end
-
-  # GET /run_cases/1
-  # GET /run_cases/1.json
+  # GET /runs/:run_id/run_cases/:id
+  # GET /runs/:run_id/run_cases/:id.json
   def show
     @rc = RunCase.find(params[:id])
+    @rc.calculate_percents
     @run = @rc.run
-    @steps = @rc.run_steps
+    @steps = @rc.run_steps.order("id")
     @steps = [] if @steps.nil?
 
     respond_to do |format|
@@ -22,7 +15,7 @@ class RunCasesController < ApplicationController
     end
   end
 
-  # GET /runs/<run_id>/run_cases/new
+  # GET /runs/:run_id/run_cases/new
   def new
     @rc = RunCase.new
     @run = Run.find(params[:run_id])
@@ -32,14 +25,14 @@ class RunCasesController < ApplicationController
     end
   end
 
-  # GET /run_cases/1/edit
+  # GET /runs/:run_id/run_cases/:id/edit
   def edit
     @rc = RunCase.find(params[:id])
     @run = @rc.project
   end
 
-  # POST /run_case
-  # POST /run_case.json
+  # POST /runs/:run_id/run_case
+  # POST /runs/:run_id/run_case.json
   def create
     @rc = RunCase.new(params[:run_case])
     @rc.run = Run.find(params[:run_id].to_i)
@@ -54,8 +47,8 @@ class RunCasesController < ApplicationController
     end
   end
 
-  # PUT /run_cases/1
-  # PUT /run_cases/1.json
+  # PUT /run_cases/:id
+  # PUT /run_cases/:id.json
   def update
     @rc = RunCase.find(params[:id])
 
@@ -70,8 +63,8 @@ class RunCasesController < ApplicationController
     end
   end
 
-  # DELETE /run_cases/1
-  # DELETE /run_cases/1.json
+  # DELETE /run_cases/:id
+  # DELETE /run_cases/:id.json
   def destroy
     @rc = RunCase.find(params[:id])
     @rc.destroy
