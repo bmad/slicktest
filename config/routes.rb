@@ -1,6 +1,13 @@
 SlickTest::Application.routes.draw do
 
   get "home/index"
+
+  resources :users
+
+  resources :users, :user_sessions
+  match 'login' => 'user_sessions#new', :as => :login
+  match 'logout' => 'user_sessions#destroy', :as => :logout
+
   resources :projects do
     resources :test_cases do
       resources :steps

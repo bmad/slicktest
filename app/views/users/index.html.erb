@@ -1,12 +1,12 @@
 <div id="content">
 
-  <h1>Projects</h1>
+  <h1>Users</h1>
 
   <p id="notice"><%= notice %></p>
 
-<a id="new_project_modal_btn" data-backdrop="false" type="button" class="btn btn-primary new_modal_btn" href="#new_project_modal" data-toggle="modal">New Project</a>
+<a id="new_user_modal_btn" data-backdrop="false" type="button" class="btn btn-primary new_modal_btn" href="#new_user_modal" data-toggle="modal">New User</a>
 <br />
-<table id="projects_table" class="table table-bordered table-responsive data_table">
+<table id="users_table" class="table table-bordered table-responsive data_table">
   <thead>
     <tr>
     <th style="width:10%"></th>
@@ -14,21 +14,21 @@
   </tr>
 </thead>
 <tbody>
-<% @projects.each do |project| %>
-  <tr id="project_<%= project.id %>" data-id="<%= project.id %>" class="project_row">
+<% @users.each do |user| %>
+  <tr id="user_<%= user.id %>" data-id="<%= user.id %>" class="user_row">
     <td class="edit-col"><a class="delete" href="#"><span class="glyphicon glyphicon-trash"></span></a></td>
-    <td class="name"><%= link_to project.name, project_path(project) %></td>
+    <td class="name"><%= link_to user.name, user_path(user) %></td>
   </tr>
 <% end %>
 </tbody>
 </table>
 
-<div id="new_project_modal" class="modal fade">
+<div id="new_user_modal" class="modal fade">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h3 class="modal-title">New Project</h3>
+        <h3 class="modal-title">New User</h3>
       </div>
       <div class="modal-body"></div>
     </div>

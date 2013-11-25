@@ -1,9 +1,10 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.14'
+gem 'rails', '3.2.15'
 
-gem 'pg'
-gem 'json'
+gem 'pg', '0.17.0'
+gem 'json', '1.8.1'
+gem 'authlogic', '3.3.0'
 
 # Gems used only for assets and not required
 # in production environments by default.
