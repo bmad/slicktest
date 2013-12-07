@@ -55,5 +55,22 @@ class InitialMigration < ActiveRecord::Migration
       t.text :description
     end
 
+    create_table :step_activities do |t|
+      t.references :user
+      t.references :step
+      t.string :activity_type
+      t.text :description
+
+      t.timestamps
+    end
+
+    create_table :run_step_activities do |t|
+      t.references :user
+      t.references :run_step
+      t.string :new_state
+
+      t.timestamps
+    end
+
   end
 end

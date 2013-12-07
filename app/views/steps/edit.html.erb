@@ -8,6 +8,10 @@
     <span class="glyphicon glyphicon-backward"></span>
   <% end %>
 
+  <%= link_to history_project_test_case_step_path(@step.test_case.project, @step.test_case, @step) do %>
+    <span class="glyphicon glyphicon-time"></span>
+  <% end %>
+
   <%= render 'form' %>
 
 </div>

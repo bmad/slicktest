@@ -1,5 +1,11 @@
 SlickTest::Application.routes.draw do
 
+  resources :run_step_activities
+
+
+  resources :step_activities
+
+
   get "home/index"
 
   resources :users
@@ -10,7 +16,11 @@ SlickTest::Application.routes.draw do
 
   resources :projects do
     resources :test_cases do
-      resources :steps
+      resources :steps do
+        member do
+          get 'history'
+        end
+      end
     end
   end
 

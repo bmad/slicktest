@@ -1,0 +1,29 @@
+<h1>Listing run_step_activities</h1>
+
+<table>
+  <tr>
+    <th>User</th>
+    <th>Run step</th>
+    <th>New state</th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @run_step_activities.each do |run_step_activity| %>
+  <tr>
+    <td><%= run_step_activity.user %></td>
+    <td><%= run_step_activity.run_step %></td>
+    <td><%= run_step_activity.new_state %></td>
+    <td><%= run_step_activity. %></td>
+    <td><%= link_to 'Show', run_step_activity %></td>
+    <td><%= link_to 'Edit', edit_run_step_activity_path(run_step_activity) %></td>
+    <td><%= link_to 'Destroy', run_step_activity, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Run step activity', new_run_step_activity_path %>

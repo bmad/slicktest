@@ -40,6 +40,15 @@ ActiveRecord::Schema.define(:version => 20130517032905) do
     t.string  "status",     :default => "new"
   end
 
+  create_table "step_activities", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "step_id"
+    t.string   "activity_type"
+    t.text     "description"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
   create_table "steps", :force => true do |t|
     t.integer  "test_case_id"
     t.integer  "place"

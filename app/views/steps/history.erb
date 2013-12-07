@@ -1,0 +1,37 @@
+<div id="content">
+
+<h1>
+  Step History
+</h1>
+
+<p id="notice"><%= notice %></p>
+
+<%= link_to edit_project_test_case_step_path(@step.test_case.project), :class => "back_link" do %>
+  <span class="glyphicon glyphicon-backward"></span>
+<% end %>
+
+<br />
+<table id="step_history_table" class="table table-bordered table-responsive data_table">
+  <thead>
+    <tr>
+    <th style="width:10%">User</th>
+    <th style="width:10%">Created At</th>
+    <th style="width:80%">Description</th>
+  </tr>
+</thead>
+<tbody>
+  <% @activities.each do |activity| %>
+    <tr id="activity_<%= activity.id %>" data-id="<%= activity.id %>" class="activity_row" data-project_id="<%= @step.test_case.project.id %>" data-case_id="<%= @step.test_case.id %>" data-step_id="<%= @step.id %>">
+      <td>
+        <%= activity.user.username %>
+      </td>
+      <td>
+        <%= activity.created_at %>
+      </td>
+      <td class="description"><pre><%= activity.description %></pre></td>
+    </tr>
+  <% end %>
+</tbody>
+</table>
+
+</div>

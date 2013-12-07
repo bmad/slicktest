@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  user: 
+  run_step: 
+  new_state: MyString
+  : 
+
+two:
+  user: 
+  run_step: 
+  new_state: MyString
+  : 

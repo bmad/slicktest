@@ -36,6 +36,10 @@ class StepsController < ApplicationController
 
     respond_to do |format|
       if @step.save
+        @step_activity = StepActivity.new(:activity_type => 'edit', :description => @step.description)
+        @step_activity.user = current_user
+        @step_activity.step = @step
+        @step_activity.save!
         format.json { render :json => @step, :status => :created, :location => @step }
         format.html { redirect_to(project_test_case_path(@step.test_case.project, @step.test_case)) }
       else
@@ -52,6 +56,10 @@ class StepsController < ApplicationController
 
     respond_to do |format|
       if @step.update_attributes(params[:step])
+        @step_activity = StepActivity.new(:activity_type => 'edit', :description => @step.description)
+        @step_activity.user = current_user
+        @step_activity.step = @step
+        @step_activity.save!
         format.html { redirect_to(project_test_case_path(@step.test_case.project, @step.test_case)) }
         format.json { head :no_content }
       else
@@ -59,6 +67,13 @@ class StepsController < ApplicationController
         format.json { render :json => @step.errors, :status => :unprocessable_entity }
       end
     end
+  end
+
+  # GET /projects/:project_id/test_cases/:test_case_id/steps/:id
+  # GET /projects/:project_id/test_cases/:test_case_id/steps/:id.json
+  def history
+    @step = Step.find(params[:id])
+    @activities = @step.step_activities.order("created_at desc").all
   end
 
   # DELETE /projects/:project_id/test_cases/:test_case_id/steps/:id
